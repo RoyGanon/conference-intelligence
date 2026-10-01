@@ -1,6 +1,19 @@
 # Grain Conference Intelligence
 
-Single-workspace sales conference MVP demo. Includes deterministic ICP scoring, page-local yearly planning, browser-local Quick Capture and contact matching, cross-conference Relationships, optional server-side AI analysis, and HubSpot preview/simulated export with optional live export. Dashboard uses a fixed fixture snapshot; Settings is an informational placeholder.
+Grain Conference Intelligence helps salespeople choose relevant conferences and keep track of the relationships they build there. It connects event prioritization, meeting capture, and cross-conference contact history so Sales can review buying intent, decide a next action, and prepare a contact for HubSpot.
+
+This single-workspace MVP uses synthetic conference data and browser-local captures. It runs without credentials, with clearly labeled demo relationship analysis and simulated export; live AI and HubSpot export require server configuration. Dashboard uses a fixed fixture snapshot; Settings is an informational placeholder.
+
+## Core workflow
+
+**Discover → Plan → Capture → Match → Understand → Export**
+
+- **Discover:** Compare demo conferences using deterministic ICP scores and explanations.
+- **Plan:** Add events to a yearly plan and review quarterly coverage and nearby trip opportunities. Planning edits reset on navigation or reload.
+- **Capture:** Record a person's name, conference, and optional details and meeting notes in Quick Capture.
+- **Match:** Review explained deterministic candidates. Choose Same Person to add an interaction to an existing contact, or Different Person to create a separate contact.
+- **Understand:** Review the factual cross-conference timeline and request relationship analysis and a suggested next action. Demo analysis replays seeded histories; custom histories return insufficient evidence without live AI.
+- **Export:** Preview the HubSpot contact payload, then explicitly confirm a simulated export or, with credentials and an email, a live contact export.
 
 ## Run locally
 Requires Node.js 20.9+ and npm.
