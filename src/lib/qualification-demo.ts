@@ -1,0 +1,22 @@
+import { demoContacts, demoInteractions, demoConferences } from "./demo-fixtures";
+import { qualificationSchema, type QualificationInput } from "./qualification";
+
+const fixtureOutputs = [
+  { priority: "high", score: 92, relationshipStatus: "warming", reasons: ["VP Finance is relevant to a finance buying decision; May 20 notes explicitly say Sarah owns the finance budget.", "May 20 notes describe EUR and USD supplier payments and unpredictable FX costs.", "September 16 notes request a product demo with treasury and ask about implementation and pricing; no purchase commitment was made."], progressionSummary: "February introduction progressed to concrete FX pain and option comparison in May, then explicit demo interest in September.", suggestedNextAction: "Confirm whether the previously requested demo happened, then schedule a 30-minute FX discovery and product demo with Sarah and treasury.", missingEvidence: ["Payment volumes and quantified FX impact", "Current buying timeline and outcome of the requested demo"] },
+  { priority: "medium", score: 60, relationshipStatus: "developing", reasons: ["Treasury Manager is relevant to multi-currency operations.", "August 11 notes describe international bookings and supplier payments in several currencies; Daniel gathers requirements and the CFO approves."], progressionSummary: "One substantive conversation identifies operational relevance, but there is no history showing increased buying intent.", suggestedNextAction: "Ask Daniel to quantify FX pain and clarify the CFO's evaluation process.", missingEvidence: ["Specific FX pain", "Budget, timeline and buying intent"] },
+  { priority: "low", score: 25, relationshipStatus: "insufficient_evidence", reasons: ["Finance Operations Lead suggests role relevance, but May 19 notes only request an overview and report no specific pain."], progressionSummary: "One introductory interaction does not establish FX exposure or increasing buying intent.", suggestedNextAction: "Share an overview after Sales review and ask about currencies, payment flows and FX pain.", missingEvidence: ["FX exposure and multi-currency operations", "Business pain, decision authority and buying intent"] },
+  { priority: "low", score: 15, relationshipStatus: "insufficient_evidence", reasons: ["September 15 notes describe general networking with a Product Manager and identify no finance responsibilities."], progressionSummary: "The available networking conversation contains no evidence of FX exposure, business pain or buying intent.", suggestedNextAction: "Ask whether there is a finance or treasury colleague responsible for cross-border payments.", missingEvidence: ["FX exposure and cross-border payments", "Business pain and buying intent"] },
+].map(output => qualificationSchema.parse(output));
+
+// Fixture replay only: never apply Sarah's story to edited notes or a namesake.
+export function demoQualification(input: QualificationInput) {
+  const ordered = [...input.interactions].sort((a,b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt));
+  const index = demoContacts.findIndex(c => c.name === input.contact.name && c.company === input.contact.company && c.role === input.contact.role && JSON.stringify(ordered) === JSON.stringify(demoInteractions.filter(i => i.contactId === c.id).map(i => ({ occurredAt: i.occurredAt, conference: demoConferences.find(event => event.id === i.conferenceId)!.name, notes: i.notes }))));
+  return index >= 0 ? fixtureOutputs[index] : qualificationSchema.parse({
+    priority: "low", score: 0, relationshipStatus: "insufficient_evidence",
+    reasons: ["Demo mode has no authored qualification fixture for this exact contact and history; it does not interpret custom notes."],
+    progressionSummary: "Relationship progression is not evaluated for custom histories in demo mode.",
+    suggestedNextAction: "Review the recorded notes manually, or configure live AI analysis to interpret this history.",
+    missingEvidence: ["A live interpretation of this contact's current history"],
+  });
+}
