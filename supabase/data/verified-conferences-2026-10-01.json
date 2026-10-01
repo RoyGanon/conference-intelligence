@@ -1,0 +1,1335 @@
+{
+  "verifiedAt": "2026-10-01T18:53:01Z",
+  "upcomingAsOf": "2026-10-01",
+  "evidenceFormat": "Researcher paraphrases of official pages, not verbatim quotes. Country normalization and vertical/region classification are explicitly editorial. No target-audience scores were assigned.",
+  "records": [
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000001",
+        "name": "Money20/20 USA 2026",
+        "startDate": "2026-10-18",
+        "endDate": "2026-10-21",
+        "city": "Las Vegas",
+        "country": "United States",
+        "region": null,
+        "vertical": "fintech",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "money2020:usa:2026",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://us.money2020.com/",
+        "sourceName": "Money20/20",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Money20/20 USA 2026 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2026-10-18."
+          },
+          "endDate": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2026-10-21."
+          },
+          "city": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Las Vegas is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: Las Vegas is in United States; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: Banks, payments businesses, retailers, fintechs and senior executives are the described audience."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Banks, payments businesses, retailers, fintechs and senior executives are the described audience."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000001",
+      "attendanceClaims": [
+        {
+          "basis": "edition_unspecified",
+          "editionYear": null,
+          "display": "11,000+ senior attendees",
+          "value": 11000,
+          "qualifier": "lower_bound",
+          "note": "Headline marketing figure has no explicit edition/forecast basis; not accepted as 2026 expected attendance.",
+          "evidence": {
+            "sourceUrl": "https://us.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Headline marketing figure has no explicit edition/forecast basis; not accepted as 2026 expected attendance."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize",
+        "region"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "payment_companies",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "banks",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "fintech_businesses",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [
+              {
+                "tag": "relevant_senior_leaders",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000002",
+        "name": "AFP 2026 Finance & Treasury Conference",
+        "startDate": "2026-11-08",
+        "endDate": "2026-11-11",
+        "city": "Las Vegas",
+        "country": "United States",
+        "region": null,
+        "vertical": "fintech",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "afp:annual:2026",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://conference.financialprofessionals.org/",
+        "sourceName": "Association for Financial Professionals",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "AFP 2026 Finance & Treasury Conference is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2026-11-08."
+          },
+          "endDate": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2026-11-11."
+          },
+          "city": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Las Vegas is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: Las Vegas is in United States; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: Corporate treasury, finance, payments and FP&A practitioners, including CFO-office leaders, are the stated audience."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Corporate treasury, finance, payments and FP&A practitioners, including CFO-office leaders, are the stated audience."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000002",
+      "attendanceClaims": [
+        {
+          "basis": "current_expected",
+          "editionYear": 2026,
+          "display": "More than 7,000 professionals",
+          "value": 7000,
+          "qualifier": "lower_bound",
+          "note": "Organizer invitation, not measured attendance; another section says nearly 7,000. Scalar stays null rather than selecting a precise estimate.",
+          "evidence": {
+            "sourceUrl": "https://conference.financialprofessionals.org/",
+            "sourceName": "Association for Financial Professionals",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer invitation, not measured attendance; another section says nearly 7,000. Scalar stays null rather than selecting a precise estimate."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize",
+        "region"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "corporate_treasury",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "corporate_finance",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [
+              {
+                "tag": "senior_finance_payment_executives",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000003",
+        "name": "FinTech Connect 2026",
+        "startDate": "2026-12-01",
+        "endDate": "2026-12-02",
+        "city": "London",
+        "country": "United Kingdom",
+        "region": "uk-southeast",
+        "vertical": "fintech",
+        "estimatedAudienceSize": 6000,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "fintechconnect:london:2026",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://www.fintechconnect.com/",
+        "sourceName": "FinTech Connect",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "FinTech Connect 2026 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2026-12-01."
+          },
+          "endDate": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2026-12-02."
+          },
+          "city": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "London is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: London is in United Kingdom; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: Financial institutions and fintech firms are addressed; payments and business banking are listed tracks."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Financial institutions and fintech firms are addressed; payments and business banking are listed tracks."
+          },
+          "region": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial application of the existing predefined region uk-southeast to London; not a maps/distance calculation."
+          },
+          "estimatedAudienceSize": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "The 2026 registration-progress section explicitly names a 6,000 visitor target; this is expected attendance, not actual attendance."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000003",
+      "attendanceClaims": [
+        {
+          "basis": "current_expected",
+          "editionYear": 2026,
+          "display": "6,000 visitor target",
+          "value": 6000,
+          "qualifier": "target",
+          "note": "Explicit 2026 visitor target, not registrations or final actual attendance. The 5,700+ registration claim is not the expected total.",
+          "evidence": {
+            "sourceUrl": "https://www.fintechconnect.com/",
+            "sourceName": "FinTech Connect",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Explicit 2026 visitor target, not registrations or final actual attendance. The 5,700+ registration claim is not the expected total."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "financial_institutions",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "fintech_businesses",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Direct payment-company, corporate-treasury or merchant-FX audience is not verified."
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Relevant leadership seniority is not verified in the collected audience evidence."
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000004",
+        "name": "PAY360 2027",
+        "startDate": "2027-04-21",
+        "endDate": "2027-04-22",
+        "city": "London",
+        "country": "United Kingdom",
+        "region": "uk-southeast",
+        "vertical": "fintech",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "pay360:london:2027",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://pay360event.com/",
+        "sourceName": "The Payments Association / PAY360",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "PAY360 2027 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2027-04-21."
+          },
+          "endDate": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2027-04-22."
+          },
+          "city": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "London is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: London is in United Kingdom; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: The 2027 audience description includes banks, merchants, payment infrastructure, card networks, acquirers and processors."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "The 2027 audience description includes banks, merchants, payment infrastructure, card networks, acquirers and processors."
+          },
+          "region": {
+            "sourceUrl": "https://pay360event.com/",
+            "sourceName": "The Payments Association / PAY360",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial application of the existing predefined region uk-southeast to London; not a maps/distance calculation."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000004",
+      "attendanceClaims": [],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "acquirers",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "processors",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "banks",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Relevant leadership seniority is not verified in the collected audience evidence."
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000005",
+        "name": "Money20/20 Asia 2027",
+        "startDate": "2027-04-27",
+        "endDate": "2027-04-29",
+        "city": "Bangkok",
+        "country": "Thailand",
+        "region": null,
+        "vertical": "fintech",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "money2020:asia:2027",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://asia.money2020.com/attend",
+        "sourceName": "Money20/20",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Money20/20 Asia 2027 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2027-04-27."
+          },
+          "endDate": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2027-04-29."
+          },
+          "city": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Bangkok is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://asia.money2020.com/attend/plan-your-trip",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "The official 2027 trip page specifies Bangkok, Thailand."
+          },
+          "vertical": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: The event targets the fintech ecosystem, including payments firms and banks; cross-border payment partnerships are described."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "The event targets the fintech ecosystem, including payments firms and banks; cross-border payment partnerships are described."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000005",
+      "attendanceClaims": [
+        {
+          "basis": "current_expected",
+          "editionYear": 2027,
+          "display": "5,000+ attendees",
+          "value": 5000,
+          "qualifier": "lower_bound",
+          "note": "Under the upcoming 2027 section; no exact single-number forecast is published, so the canonical scalar remains null.",
+          "evidence": {
+            "sourceUrl": "https://asia.money2020.com/attend",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Under the upcoming 2027 section; no exact single-number forecast is published, so the canonical scalar remains null."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize",
+        "region"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "payment_companies",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "banks",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "fintech_businesses",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "cross_border_payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "leadership": {
+            "tags": [],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Relevant leadership seniority is not verified in the collected audience evidence."
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000006",
+        "name": "Money20/20 Europe 2027",
+        "startDate": "2027-06-08",
+        "endDate": "2027-06-10",
+        "city": "Amsterdam",
+        "country": "Netherlands",
+        "region": "benelux",
+        "vertical": "fintech",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "money2020:europe:2027",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://europe.money2020.com/",
+        "sourceName": "Money20/20",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Money20/20 Europe 2027 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2027-06-08."
+          },
+          "endDate": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2027-06-10."
+          },
+          "city": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Amsterdam is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: Amsterdam is in Netherlands; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: The stated audience includes senior leaders from banks, payments, technology, retail and fintech businesses."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "The stated audience includes senior leaders from banks, payments, technology, retail and fintech businesses."
+          },
+          "region": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial application of the existing predefined region benelux to Amsterdam; not a maps/distance calculation."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000006",
+      "attendanceClaims": [
+        {
+          "basis": "historical",
+          "editionYear": 2026,
+          "display": "7,500+ attendees in 2026",
+          "value": 7500,
+          "qualifier": "lower_bound",
+          "note": "Explicit 2026 results, never used as 2027 expected attendance.",
+          "evidence": {
+            "sourceUrl": "https://europe.money2020.com/",
+            "sourceName": "Money20/20",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Explicit 2026 results, never used as 2027 expected attendance."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "payment_companies",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "banks",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "fintech_businesses",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [
+              {
+                "tag": "relevant_senior_leaders",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000007",
+        "name": "TravelTech Show 2027",
+        "startDate": "2027-06-23",
+        "endDate": "2027-06-24",
+        "city": "London",
+        "country": "United Kingdom",
+        "region": "uk-southeast",
+        "vertical": "travel",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "traveltechshow:london:2027",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://traveltech-show.com/",
+        "sourceName": "Northstar Travel Group / TravelTech Show",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "TravelTech Show 2027 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2027-06-23."
+          },
+          "endDate": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2027-06-24."
+          },
+          "city": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "London is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: London is in United Kingdom; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing travel vertical, supported by: Travel technology buyers from agencies, operators, airlines and hotels are described; payment technology is among the show sectors."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Travel technology buyers from agencies, operators, airlines and hotels are described; payment technology is among the show sectors."
+          },
+          "region": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial application of the existing predefined region uk-southeast to London; not a maps/distance calculation."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000007",
+      "attendanceClaims": [
+        {
+          "basis": "edition_unspecified",
+          "editionYear": null,
+          "display": "Over 700 senior buyers and 100+ suppliers",
+          "value": 700,
+          "qualifier": "lower_bound",
+          "note": "Generic audience segments are not an edition-specific total attendance forecast; the page retains explicitly dated 2026 sections.",
+          "evidence": {
+            "sourceUrl": "https://traveltech-show.com/",
+            "sourceName": "Northstar Travel Group / TravelTech Show",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Generic audience segments are not an edition-specific total attendance forecast; the page retains explicitly dated 2026 sections."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment.",
+        "Use the explicit next-year 2027 announcement; footer/FAQ describe the separate 2026 edition."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "travel_with_payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Direct payment-company, corporate-treasury or merchant-FX audience is not verified."
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "payments",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [
+              {
+                "tag": "relevant_buyers",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Relevant leadership seniority is not verified in the collected audience evidence."
+          }
+        }
+      }
+    },
+    {
+      "conference": {
+        "id": "20000001-0000-4000-8000-000000000008",
+        "name": "EuroFinance International Treasury Management 2027",
+        "startDate": "2027-10-06",
+        "endDate": "2027-10-08",
+        "city": "Amsterdam",
+        "country": "Netherlands",
+        "region": "benelux",
+        "vertical": "fintech",
+        "estimatedAudienceSize": null,
+        "targetAudienceFit": null,
+        "attendanceStatus": "unplanned",
+        "isDemo": false,
+        "editionKey": "eurofinance:international:2027",
+        "lifecycleStatus": "scheduled",
+        "needsReview": false,
+        "reviewReason": null,
+        "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+        "sourceName": "EuroFinance / Economist Impact",
+        "lastCheckedAt": "2026-10-01T18:53:01Z",
+        "lastVerifiedAt": "2026-10-01T18:53:01Z",
+        "acceptedEvidence": {
+          "name": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "EuroFinance International Treasury Management 2027 is an advertised upcoming edition."
+          },
+          "startDate": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition starts 2027-10-06."
+          },
+          "endDate": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming edition ends 2027-10-08."
+          },
+          "city": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Amsterdam is the announced host city."
+          },
+          "country": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Geographic normalization by researcher: Amsterdam is in Netherlands; the source identifies the event city/venue."
+          },
+          "vertical": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial mapping to the existing fintech vertical, supported by: Senior corporate treasurers from multinationals, banks and solution providers are described, with cash management and liquidity themes."
+          },
+          "lifecycleStatus": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Organizer advertises this future edition; no cancellation notice was found in the checked edition information."
+          },
+          "targetAudience": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Senior corporate treasurers from multinationals, banks and solution providers are described, with cash management and liquidity themes."
+          },
+          "region": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Editorial application of the existing predefined region benelux to Amsterdam; not a maps/distance calculation."
+          }
+        },
+        "updatedAt": "2026-10-01T18:53:01Z",
+        "revision": 1
+      },
+      "observationId": "30000001-0000-4000-8000-000000000008",
+      "attendanceClaims": [
+        {
+          "basis": "current_expected",
+          "editionYear": 2027,
+          "display": "2,700+ treasury professionals",
+          "value": 2700,
+          "qualifier": "lower_bound",
+          "note": "Upcoming invitation is distinguished from the same page's historical 2026 results. Canonical scalar remains null because the claim is a lower bound.",
+          "evidence": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Upcoming invitation is distinguished from the same page's historical 2026 results. Canonical scalar remains null because the claim is a lower bound."
+          }
+        },
+        {
+          "basis": "historical",
+          "editionYear": 2026,
+          "display": "2,700+ senior treasury attendees in 2026",
+          "value": 2700,
+          "qualifier": "lower_bound",
+          "note": "Historical results section only; not a replacement for a 2027 forecast.",
+          "evidence": {
+            "sourceUrl": "https://www.eurofinance.com/international-treasury-event/",
+            "sourceName": "EuroFinance / Economist Impact",
+            "checkedAt": "2026-10-01T18:53:01Z",
+            "excerpt": "Historical results section only; not a replacement for a 2027 forecast."
+          }
+        }
+      ],
+      "incompleteFields": [
+        "targetAudienceFit",
+        "estimatedAudienceSize"
+      ],
+      "icpStatus": "incomplete",
+      "notes": [
+        "Treasury/payments map to fintech because the current enum has no treasury/payments category.",
+        "Audience description is evidence for relevance, not a numeric fit assessment."
+      ],
+      "targetAudienceAssessment": {
+        "rubricVersion": "grain-target-audience-v1",
+        "reviewState": "reviewed",
+        "reviewedAt": "2026-10-01T19:07:08Z",
+        "reviewedBy": "Lead integration review of collected evidence",
+        "factors": {
+          "audience": {
+            "tags": [
+              {
+                "tag": "corporate_treasury",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "banks",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          },
+          "relevance": {
+            "tags": [
+              {
+                "tag": "cash_management",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "liquidity",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": false,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": "Explicit cross-border, FX or multi-currency relevance is not verified."
+          },
+          "leadership": {
+            "tags": [
+              {
+                "tag": "corporate_treasurers",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              },
+              {
+                "tag": "relevant_senior_leaders",
+                "evidenceRefs": [
+                  "targetAudience"
+                ],
+                "reviewed": true
+              }
+            ],
+            "resolved": true,
+            "resolutionEvidenceRefs": [],
+            "unresolvedReason": null
+          }
+        }
+      }
+    }
+  ]
+}

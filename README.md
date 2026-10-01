@@ -40,10 +40,12 @@ Production: `npm run build`, then `npm start`.
 
 ## Supabase setup (optional, manual)
 In a new Supabase project's SQL Editor, run supabase/migrations/202610010001_foundation.sql, then optionally supabase/seed.sql. The migration is intended for a fresh database; the seed is repeatable by ID. A local CLI configuration is not required.
-RLS denies browser access. Future server routes will use server-only configuration after access protection is implemented. The current app does not connect to Supabase; applying SQL does not connect the application to the database.
+RLS denies browser access. Conferences now reads accepted real records through the server-only Supabase reader. Configure the server variables and apply all three migrations plus the verified import as documented below. Without Supabase, Conferences shows an explicit unavailable state. Other pages continue using their existing demo data.
 Keep secrets in .env.local or deployment environment settings. Never commit keys or expose the service-role key using NEXT_PUBLIC_.
 
 ## Deployment
+Supabase conference schema/import preparation and read-only readiness checks are documented in [Supabase conference setup](docs/supabase-conference-setup.md). Incomplete real ICP inputs show unknown values and no tier; evidence-supported audience floors remain separate from accepted scores. Planning and Quick Capture still use the demo dataset, so real conference cards do not link into demo capture.
+
 Deploy as a standard Next.js application on Vercel with default build settings. The demo needs no environment variables. Use synthetic data for public demos; protect the deployment before enabling real contact data or privileged server mutations.
 
 ## Not implemented
@@ -67,4 +69,8 @@ Email is required for live export. The preview maps the first word of the full n
 The server searches by email, checks direct email lookup if search returns nothing, then updates by ID or creates a contact. Success displays the returned HubSpot ID. Credentials/provider bodies are never returned to the browser. Buttons prevent concurrent submission; identical retries are deduplicated for one minute within one server process. Success/status is page-local and resets on navigation or reload; no CRM persistence, background sync or distributed idempotency is added. Timeouts may occur after a provider write; retry searches email again. No real account is required for checks: `node --test tests/*.test.mjs`, `node scripts/check-conference-scoring.cjs`, `npx tsc --noEmit`, `npm run lint`, `npm run build`.
 
 API reference: [HubSpot contact API](https://developers.hubspot.com/docs/api-reference/legacy/crm/objects/contacts/guide).
+
+## Offline real-conference dataset
+
+Eight official-source editions were researched on October 1, 2026. They are an offline import artifact, not runtime data. See [the research report and manual import instructions](docs/verified-real-conferences.md). Validate with `node scripts/prepare-real-conferences.cjs`; no database writes occur. The current synthetic fixtures, scoring and UI remain unchanged.
 
