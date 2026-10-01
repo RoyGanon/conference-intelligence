@@ -208,3 +208,29 @@ test("integrated real capture timeline feeds exact custom history to AI and fail
   assert.equal(result.mode, "live"); assert.deepEqual(result.analysis, output);
   assert.deepEqual(store.readCaptureState(), state);
 });
+
+test("Relationships separates seeded identities from captured contacts and preserves Sarah demo input", () => {
+  const { demoContacts, demoInteractions, demoConferences } = load(path.resolve("src/lib/demo-fixtures.ts"));
+  const captured = { ...demoContacts[0], id: "40000005-0000-4000-8000-000000000001", company: "Captured Company" };
+  const render = contacts => {
+    let received;
+    const state = { contacts, interactions: demoInteractions, conferences: [] };
+    const { RelationshipsWorkspace } = load(path.resolve("src/components/capture/relationships-workspace.tsx"), {
+      react: { ...external("react"), useEffect: () => {}, useState: initial => [initial === undefined ? state : initial, () => {}] },
+      "./relationship-intelligence": { RelationshipIntelligence: ({ input }) => { received = input; return null; } },
+    });
+    const html = renderToStaticMarkup(external("react").createElement(RelationshipsWorkspace, { contactId: demoContacts[0].id, conferences: [] }));
+    return { html, received };
+  };
+  const { html, received } = render([...demoContacts, captured]);
+  const capturedSection = html.match(/<section aria-label="Captured contacts">([\s\S]*?)<\/section>/)[1];
+  const demoSection = html.match(/<section aria-label="Demo contacts">([\s\S]*?)<\/section>/)[1];
+  assert.ok(capturedSection.includes("Captured Company")); assert.equal(capturedSection.includes(">Demo</span>"), false);
+  assert.equal(demoSection.includes("Captured Company"), false);
+  assert.equal((demoSection.match(/>Demo<\/span>/g) ?? []).length, demoContacts.length);
+  assert.ok(html.includes("Captured relationships are saved in this browser only."));
+  assert.deepEqual(received.interactions, demoInteractions.filter(i => i.contactId === demoContacts[0].id).map(i => ({ occurredAt: i.occurredAt, conference: demoConferences.find(c => c.id === i.conferenceId).name, notes: i.notes })));
+  const empty = render(demoContacts).html;
+  assert.ok(empty.includes("No captured contacts yet."));
+  assert.ok(empty.includes("Capture someone at a conference to start building relationship history."));
+});
