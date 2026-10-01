@@ -64,6 +64,21 @@ test("real UI renders evidence, incomplete labels and no unsupported capture lin
   assert.equal(html.includes("/leads?conferenceId="), false);
   assert.equal(html.split(">Tier A</span>").length - 1, 1);
 });
+test("incomplete cards expose missing scoring inputs while complete cards remain unchanged", () => {
+  const { ConferenceDiscovery } = load(path.resolve("src/components/conferences/conference-discovery.tsx"));
+  const render = item => renderToStaticMarkup(external("react").createElement(ConferenceDiscovery, { conferences: [item] }));
+  for (const [index, expected] of [[0, "attendance, geography"], [3, "attendance"], [5, "attendance, audience assessment"]]) {
+    const html = render(items[index]);
+    assert.ok(html.includes(`Missing: ${expected}</p>`));
+    assert.ok(html.includes("Why is ICP incomplete?"));
+  }
+  const assessmentOnly = structuredClone(items[2]);
+  assessmentOnly.scoring = null; assessmentOnly.missingInputs = [];
+  assert.ok(render(assessmentOnly).includes("Missing: audience assessment approval</p>"));
+  const complete = render(items[2]);
+  assert.ok(complete.includes("100 / 100")); assert.ok(complete.includes(">Tier A</span>"));
+  assert.equal(complete.includes("Missing:"), false);
+});
 test("page reads on each request and renders unavailable without demo fallback", async () => {
   let reads = 0; let connections = 0;
   const { default: Page } = load(path.resolve("src/app/conferences/page.tsx"), {

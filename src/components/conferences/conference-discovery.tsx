@@ -7,6 +7,7 @@ import { EmptyState, TierBadge } from "@/components/ui";
 
 const verticalLabels = { fintech: "Fintech", ecommerce: "Ecommerce", travel: "Travel", saas: "SaaS" };
 const inputLabels = { estimatedAudienceSize: "Audience size", targetAudienceFit: "Accepted target audience fit", region: "Scoring region" };
+const compactInputLabels = { estimatedAudienceSize: "attendance", targetAudienceFit: "audience assessment", region: "geography" };
 const fieldStyle = "mt-2 block min-h-12 w-full rounded-lg border border-slate-300 bg-white px-3 py-2";
 export function ConferenceDiscovery({ conferences }: { conferences: DiscoveryConference[] }) {
   const [search, setSearch] = useState("");
@@ -34,7 +35,7 @@ export function ConferenceDiscovery({ conferences }: { conferences: DiscoveryCon
             <p className="mt-2 text-sm text-slate-600"><time dateTime={c.startDate}>{c.startDate}</time>{c.endDate !== c.startDate && ` – ${c.endDate}`}</p>
             <p className="mt-1 text-sm text-slate-600">{c.city}, {c.country} · {c.region ? geographicRegions[c.region].label : "Region unknown / unmapped"}</p>
             <p className="mt-2 text-xs capitalize">{c.lifecycleStatus}{c.needsReview && " · Needs review"}</p>{c.needsReview && <p className="mt-1 text-xs text-amber-900">{c.reviewReason}</p>}
-            <div className="mt-5 flex flex-wrap justify-between gap-4 border-t pt-4"><div><p className="text-xs">Expected audience</p><p>{c.estimatedAudienceSize === null ? "Unknown / not reliably published" : `${c.estimatedAudienceSize.toLocaleString("en-US")} attendees`}</p></div><div><p className="text-xs">ICP score</p><p className="text-lg font-semibold">{scoring ? `${scoring.score} / 100` : "ICP incomplete"}</p></div></div>
+            <div className="mt-5 flex flex-wrap justify-between gap-4 border-t pt-4"><div><p className="text-xs">Expected audience</p><p>{c.estimatedAudienceSize === null ? "Unknown / not reliably published" : `${c.estimatedAudienceSize.toLocaleString("en-US")} attendees`}</p></div><div><p className="text-xs">ICP score</p><p className="text-lg font-semibold">{scoring ? `${scoring.score} / 100` : "ICP incomplete"}</p>{!scoring && <p className="mt-1 text-xs text-amber-900">Missing: {item.missingInputs.map(field => compactInputLabels[field]).join(", ") || "audience assessment approval"}</p>}</div></div>
             <p className="mt-3 text-xs">Accepted target audience fit: {c.targetAudienceFit === null ? "Unknown / assessment incomplete" : `${c.targetAudienceFit}/100`}</p>
             <p className="mt-2 text-xs text-slate-500">Last verified: {c.lastVerifiedAt ?? "Unknown"} · Last checked: {c.lastCheckedAt ?? "Unknown"}</p>
             {c.sourceUrl && <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block break-words text-sm text-[#294b25] underline">Official source: {c.sourceName}</a>}
