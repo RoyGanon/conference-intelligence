@@ -20,7 +20,7 @@ const datasetSchema = z.strictObject({
       qualifier: z.enum(["target", "lower_bound", "approximate"]), note: z.string().min(1), evidence: conferenceEvidenceSchema,
     })),
     incompleteFields: z.array(z.enum(["region", "estimatedAudienceSize", "targetAudienceFit"])),
-    icpStatus: z.literal("incomplete"), notes: z.array(z.string()),
+    icpStatus: z.enum(["incomplete", "complete"]), notes: z.array(z.string()),
   })).min(8).max(12),
 });
 function validateDataset(raw) {
@@ -39,6 +39,7 @@ function validateDataset(raw) {
     if (c.region !== null && !c.acceptedEvidence.region) throw new Error("Missing region classification evidence.");
     const missing = [...(c.targetAudienceFit === null ? ["targetAudienceFit"] : []), ...(c.estimatedAudienceSize === null ? ["estimatedAudienceSize"] : []), ...(c.region === null ? ["region"] : [])];
     if (JSON.stringify(missing) !== JSON.stringify(r.incompleteFields)) throw new Error("Incomplete scoring fields are inconsistent.");
+    if (r.icpStatus !== (missing.length === 0 && assessment.complete ? "complete" : "incomplete")) throw new Error("Overall ICP state must match accepted scorer inputs.");
     if (c.estimatedAudienceSize !== null && (!c.acceptedEvidence.estimatedAudienceSize || !r.attendanceClaims.some(claim => claim.basis === "current_expected" && claim.editionYear === Number(c.startDate.slice(0, 4)) && claim.qualifier === "target" && claim.value === c.estimatedAudienceSize))) throw new Error("Attendance requires an explicit current-edition target; historical/qualified figures cannot supply it.");
   }
   return data;
@@ -84,7 +85,7 @@ if (require.main === module) {
     if (args[1] === "--output") fs.writeFileSync(args[2], sql, { encoding: "utf8", flag: "wx" });
     else process.stdout.write(sql);
   } else {
-    console.log(`Validated ${data.records.length} real editions, evidence and incomplete ICP metadata. No database writes performed.`);
+    console.log(`Validated ${data.records.length} real editions and reviewed ICP metadata. No database writes performed.`);
     for (const record of data.records) {
       const result = assessTargetAudience(record.targetAudienceAssessment, record.conference.acceptedEvidence);
       console.log(`${record.conference.name}: supported floor ${result.supportedScoreFloor}/100; accepted ${result.acceptedScore ?? "unknown"}; unresolved ${result.unresolvedFactors.map(item => item.factor).join(", ") || "none"}${result.pendingReview ? "; review pending" : ""}`);

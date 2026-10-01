@@ -26,6 +26,8 @@ The eight editions were researched on October 1, 2026. Import preparation valida
 
 ## Configure and verify reads
 
+For the approved five-conference audience review on the already-populated production database, use `supabase/reviewed-target-audience-update.sql`, not the historical initial import. See [review details](verified-real-conferences.md). The update is prepared only; no database execution is authorized in this step. Original attendance, region and whole-conference verification timestamps remain unchanged. Only FinTech Connect becomes overall ICP complete after application.
+
 Copy `.env.example` to `.env.local`. Set `SUPABASE_URL` to the HTTPS project root URL and **one** server key: preferred `SUPABASE_SECRET_KEY` (`sb_secret_...`) or legacy `SUPABASE_SERVICE_ROLE_KEY` (service-role JWT). A secret key takes precedence if both are present. Do not use publishable/anon keys or any `NEXT_PUBLIC_` credential. Configure the same variables as server secrets at deployment. No page or public readiness endpoint exposes this privileged reader.
 
 ```powershell

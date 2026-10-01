@@ -32,14 +32,15 @@ function accepted(record) {
 const records = dataset.records.map(accepted);
 const items = records.map(prepareConferenceDiscovery);
 const defaults = { search: "", vertical: "", region: "", tier: "" };
-test("all eight researched conferences retain unknown inputs, floors and no ICP tiers", () => {
+test("only FinTech Connect has all inputs; seven conferences remain ICP incomplete", () => {
   assert.equal(items.length, 8);
-  for (const item of items) { assert.equal(item.scoring, null); assert.equal(item.conference.targetAudienceFit, null); }
-  assert.deepEqual(items.map(item => item.supportedScoreFloor), [90, 90, 60, 75, 85, 90, 55, 90]);
+  assert.equal(items[2].scoring.score, 100); assert.equal(items[2].scoring.tier, "A");
+  for (const [index, item] of items.entries()) if (index !== 2) assert.equal(item.scoring, null);
+  assert.deepEqual(items.map(item => item.supportedScoreFloor), [100, 100, 100, 100, 100, 90, 55, 90]);
 });
 test("filters handle unknown geography, incomplete ICP and case/whitespace searches", () => {
-  assert.equal(filterDiscoveryConferences(items, { ...defaults, tier: "A" }).length, 0);
-  assert.equal(filterDiscoveryConferences(items, { ...defaults, tier: "incomplete" }).length, 8);
+  assert.equal(filterDiscoveryConferences(items, { ...defaults, tier: "A" }).length, 1);
+  assert.equal(filterDiscoveryConferences(items, { ...defaults, tier: "incomplete" }).length, 7);
   assert.equal(filterDiscoveryConferences(items, { ...defaults, region: "unknown" }).length, 3);
   assert.equal(filterDiscoveryConferences(items, { ...defaults, search: "  LAS VEGAS " }).length, 2);
   assert.equal(filterDiscoveryConferences(items, { ...defaults, vertical: "travel" }).length, 1);
@@ -61,7 +62,7 @@ test("real UI renders evidence, incomplete labels and no unsupported capture lin
   const html = renderToStaticMarkup(external("react").createElement(ConferenceDiscovery, { conferences: items }));
   for (const text of ["Money20/20 USA 2026", "Unknown / not reliably published", "ICP incomplete", "Supported target audience floor", "Official source", "Accepted source evidence"]) assert.ok(html.includes(text));
   assert.equal(html.includes("/leads?conferenceId="), false);
-  assert.equal(html.includes(">Tier A</span>"), false);
+  assert.equal(html.split(">Tier A</span>").length - 1, 1);
 });
 test("page reads on each request and renders unavailable without demo fallback", async () => {
   let reads = 0; let connections = 0;

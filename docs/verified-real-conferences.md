@@ -1,10 +1,37 @@
 # Verified real conference import — October 1, 2026
 
-Offline research snapshot, checked at 2026-10-01T18:53:01Z. Eight upcoming editions were reviewed against official pages. Nothing has been imported into a remote database or connected to the UI. Synthetic fixtures and seed SQL remain unchanged.
+Initial research snapshot, checked at 2026-10-01T18:53:01Z. The developer reports the original eight editions/observations are imported in production and Conferences now reads them. Synthetic fixtures and seed SQL remain unchanged. The approved audience-review changes described below are prepared locally only; their SQL has not been executed.
+
+## Approved audience review (recorded October 1, 2026, 20:18:14 UTC)
+
+The canonical dataset now contains five complete Target Audience Fit assessments of 100 under unchanged `grain-target-audience-v1`. These are reviewed structured tags, not conference-name matching. Missing attendance and region inputs remain null. Only FinTech Connect is overall ICP complete: fintech 40 + audience 30 + attendance 15 + geography 15 = 100, Tier A. Scores/tiers are computed by the existing scorer, not persisted as new database fields.
+
+| Conference | New official evidence | Audience fit | Overall ICP |
+|---|---|---:|---|
+| Money20/20 USA 2026 | [2026 content pillars](https://us.money2020.com/agenda/content-pillars): explicit cross-border payments and settlement | 100 | Incomplete: audience size, unmapped Las Vegas region |
+| AFP 2026 | [2026 sessions](https://conference.financialprofessionals.org/program/sessions/sessions): cross-currency payments and FX workflows | 100 | Incomplete: qualified/conflicting attendance language, unmapped Las Vegas region |
+| FinTech Connect 2026 | [Sponsor audience](https://www.fintechconnect.com/sponsor-exhibit): corporate treasurers and cross-border treasury operations; [payments track](https://www.fintechconnect.com/payment-innovation): cross-border payment heads and senior payments leadership | 100 | **100, Tier A**: accepted 6,000 visitor target and uk-southeast region preserved |
+| PAY360 2027 | [Official event page](https://pay360event.com/): 2027 cross-border themes and senior payments decision-makers | 100 | Incomplete: 7,000+ is not an exact attendance forecast |
+| Money20/20 Asia 2027 | [2027 attendance page](https://asia.money2020.com/attend): upcoming audience includes one-third C-suite | 100 | Incomplete: 5,000+ remains a lower bound; Bangkok region unmapped |
+| Money20/20 Europe 2027 | Existing evidence unchanged; edition-specific cross-border relevance unresolved | null (floor 90) | Incomplete: target fit and audience size; 2026 attendance is historical |
+| TravelTech Show 2027 | Existing evidence unchanged; higher audience/FX/leadership factors unresolved | null (floor 55) | Incomplete: target fit and total audience size |
+| EuroFinance 2027 | Existing evidence unchanged; detailed FX agenda belongs to 2026 | null (floor 90) | Incomplete: target fit and exact audience size; 2,700+ remains qualified |
+
+New evidence paraphrases are stored under separately named accepted-evidence keys and linked from awarded assessment tags. Original fact verification timestamps and all existing evidence are preserved; this review does not claim to reverify dates, location or attendance. No additional web research was performed during implementation.
+
+For the **existing production records**, review/run only `supabase/reviewed-target-audience-update.sql` after approval. It updates five audience fits/assessments, merges new evidence, increments revision and sets updated_at only on a first application, and appends five accepted review observations (stable IDs beginning `30000002`). The original eight observations remain untouched. All updates share one transaction; locked conference rows, expected baseline facts/assessment/evidence and observation conflict checks fail closed. Identical re-execution leaves the reviewed state/revision unchanged. No conference insertion, schema changes, deletes or unrelated field updates occur.
+
+`supabase/data/target-audience-review-baseline.json` preserves the five pre-review records and hashes the three untouched records for offline validation. `scripts/prepare-target-audience-review.cjs` regenerates deterministic update SQL to a **new** path:
+
+```powershell
+node scripts/prepare-target-audience-review.cjs --output reviewed-target-audience-update-new.sql
+```
+
+The original `supabase/verified-conferences-import.sql` is retained unchanged as the historical artifact already executed in production. Do not rerun it to apply the review: it intentionally rejects changed accepted assessments. The existing fresh-import generator now reads the revised dataset and supports complete/incomplete metadata; it is not the production update mechanism. SQL execution, database conflict/rollback and repeat-application behavior remain untested against PostgreSQL in this session.
 
 The canonical JSON is `supabase/data/verified-conferences-2026-10-01.json`. Evidence entries are short researcher paraphrases, not verbatim quotations or saved HTML. Each accepted factual field has source URL/name/check timestamp. Country normalization, the existing vertical mapping, and predefined regions are explicitly editorial; no maps API or numeric audience-fit assessment was used. Treasury and payments map to the existing `fintech` category. Target-audience descriptions support relevance, not a score.
 
-## Accepted editions
+## Initial accepted editions (historical snapshot before the approved review)
 
 | Conference / official source | Dates | City / country | Vertical | Canonical audience size | Target-audience evidence | Incomplete inputs |
 |---|---|---|---|---|---|---|
@@ -17,7 +44,7 @@ The canonical JSON is `supabase/data/verified-conferences-2026-10-01.json`. Evid
 | [TravelTech Show 2027](https://traveltech-show.com/) | Jun 23–24, 2027 | London, United Kingdom | travel | Unknown | Travel technology buyers from operators, agencies, airlines and hotels; payment technology sectors | audience size, target fit |
 | [EuroFinance International Treasury Management 2027](https://www.eurofinance.com/international-treasury-event/) | Oct 6–8, 2027 | Amsterdam, Netherlands | fintech (treasury) | Unknown scalar; 2,700+ expected claim retained | Multinational corporate treasurers, banks and treasury solution providers | audience size, target fit |
 
-All eight have `targetAudienceFit: null`, `icpStatus: incomplete`, and no persisted score or A/B/C tier. The current scorer/UI are untouched; this dataset must not be passed into the complete runtime fixture scorer until incomplete scoring support is implemented.
+At the initial snapshot, all eight had null target audience fit and incomplete ICP. The approved review above supersedes those audience values; runtime scoring already handles incomplete inputs without tiers.
 
 ## Attendance interpretation and source quality
 
@@ -42,7 +69,7 @@ The tool has no network/database access and reads no credentials. SQL imports ei
 
 The generated SQL has not been executed against PostgreSQL locally. Database application, transaction rollback, and repeat-import verification remain staging checks. This is not a crawler, scheduler, or runtime Supabase integration.
 
-## Deterministic audience rubric v1
+## Deterministic audience rubric v1 — initial assignments
 
 `grain-target-audience-v1` uses reviewed structured tags linked to `acceptedEvidence` keys. Audience levels are 60/45/30, payment/FX levels 25/15, and leadership/buyer levels 15/10. Each factor takes its highest supported level once. Unknown remains null; explicit non-applicability can establish zero. Accepting a lower level or zero requires resolution evidence showing that higher levels do not apply. Only a reviewed assessment with every factor resolved can populate the accepted score. No names or keywords are interpreted by code.
 
@@ -57,4 +84,4 @@ The generated SQL has not been executed against PostgreSQL locally. Database app
 | TravelTech Show | 30 | 15 | 10 | 55 | Direct financial audience/exposure; cross-border/FX; leadership |
 | EuroFinance | 60 | 15 | 15 | 90 | Cross-border/FX/multi-currency |
 
-All eight are incomplete: accepted targetAudienceFit stays null and no tier is assigned. Source checks were not refreshed; tags use only the previously collected audience evidence. The SQL generator derives and stores input/result explanation metadata in `target_audience_assessment`. Existing imported records with different metadata require explicit review rather than an automatic overwrite. Runtime scoring weights, tiers and fixture imports are unchanged.
+The initial assignments were all incomplete. The approved review above adds documented evidence for five completed assessments. The SQL generator derives and stores input/result explanation metadata in `target_audience_assessment`. Existing imported records with different metadata require the guarded review update rather than an automatic overwrite. Runtime scoring weights, tiers and fixture imports are unchanged.

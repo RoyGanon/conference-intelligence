@@ -6,7 +6,8 @@ const external = createRequire(import.meta.url);
 const { dataPath, validateDataset, buildSql } = external("../scripts/prepare-real-conferences.cjs");
 const { assessTargetAudience, targetAudienceRubricVersion } = external("../src/lib/target-audience-fit.ts");
 const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-const first = data.records[0];
+const baseline = JSON.parse(fs.readFileSync("supabase/data/target-audience-review-baseline.json", "utf8"));
+const first = baseline.records[0];
 const evidence = first.conference.acceptedEvidence;
 test("versioned evidence-linked scoring is deterministic and preserves input", () => {
   const original = JSON.stringify(first);
@@ -26,8 +27,8 @@ test("overlapping and duplicate tags award the highest level once", () => {
   assert.equal(assessTargetAudience(input, evidence).supportedScoreFloor, 100);
 });
 test("unknown is null; explicit evidence-backed non-applicability is zero", () => {
-  const input = structuredClone(data.records[2].targetAudienceAssessment);
-  assert.equal(assessTargetAudience(input, data.records[2].conference.acceptedEvidence).components[2].points, null);
+  const input = structuredClone(baseline.records[2].targetAudienceAssessment);
+  assert.equal(assessTargetAudience(input, baseline.records[2].conference.acceptedEvidence).components[2].points, null);
   input.factors.leadership.resolved = true; input.factors.leadership.unresolvedReason = null;
   assert.throws(() => assessTargetAudience(input, evidence), /resolution requires/);
   const negative = { ...evidence, negative: { ...evidence.targetAudience, excerpt: "Test evidence explicitly establishes no relevant buyers or leadership." } };
@@ -61,10 +62,10 @@ test("dangling/malformed evidence, unreviewed tags and unsupported versions fail
   assert.throws(() => assessTargetAudience(input, evidence));
   assert.throws(() => assessTargetAudience({ ...first.targetAudienceAssessment, rubricVersion: "v2" }, evidence));
 });
-test("eight reviewed assignments retain approved floors, null scores and import metadata", () => {
+test("five completed assessments and three unresolved assessments retain versioned import metadata", () => {
   const records = validateDataset(data).records;
-  assert.deepEqual(records.map(r => assessTargetAudience(r.targetAudienceAssessment, r.conference.acceptedEvidence).supportedScoreFloor), [90, 90, 60, 75, 85, 90, 55, 90]);
-  for (const r of records) assert.equal(assessTargetAudience(r.targetAudienceAssessment, r.conference.acceptedEvidence).acceptedScore, null);
+  assert.deepEqual(records.map(r => assessTargetAudience(r.targetAudienceAssessment, r.conference.acceptedEvidence).supportedScoreFloor), [100, 100, 100, 100, 100, 90, 55, 90]);
+  assert.deepEqual(records.map(r => assessTargetAudience(r.targetAudienceAssessment, r.conference.acceptedEvidence).acceptedScore), [100, 100, 100, 100, 100, null, null, null]);
   assert.match(buildSql(data), /target_audience_assessment/);
   const altered = structuredClone(data); altered.records[0].conference.targetAudienceFit = 90;
   assert.throws(() => validateDataset(altered), /Accepted target audience fit/);

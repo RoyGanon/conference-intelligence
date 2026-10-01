@@ -15,13 +15,19 @@ function load(filename) {
 const server = load(path.resolve("src/lib/conferences-server.ts"));
 const { assessTargetAudience } = load(path.resolve("src/lib/target-audience-fit.ts"));
 const dataset = JSON.parse(fs.readFileSync("supabase/data/verified-conferences-2026-10-01.json", "utf8"));
-function row() {
-  const record = dataset.records[0];
+function row(record = dataset.records[5]) {
   return { ...Object.fromEntries(Object.entries(record.conference).map(([key, value]) => [key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`), value])),
     target_audience_assessment: { input: record.targetAudienceAssessment, result: assessTargetAudience(record.targetAudienceAssessment, record.conference.acceptedEvidence) } };
 }
 const options = { url: "https://example.supabase.co", key: "sb_secret_test" };
 const response = data => new Response(JSON.stringify(data));
+test("reader validates five completed audience reviews while retaining three incomplete assessments", async () => {
+  const result = await server.readAcceptedRealConferences({ ...options, fetcher: async () => response(dataset.records.map(row)) });
+  assert.equal(result.status, "available");
+  assert.deepEqual(result.conferences.map(r => r.assessment.complete), [true, true, true, true, true, false, false, false]);
+  assert.deepEqual(result.conferences.map(r => r.conference.targetAudienceFit), [100, 100, 100, 100, 100, null, null, null]);
+  assert.equal(result.conferences.filter(r => r.missingInputs.length === 0).length, 1);
+});
 test("server reader preserves accepted facts, unknown inputs and evidence-linked floor", async () => {
   const result = await server.readAcceptedRealConferences({ ...options, fetcher: async (url, init) => {
     assert.equal(init.method, "GET"); assert.equal(init.cache, "no-store"); assert.equal(init.redirect, "error");

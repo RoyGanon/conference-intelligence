@@ -5,12 +5,12 @@ import { createRequire } from "node:module";
 const requireExternal = createRequire(import.meta.url);
 const { validateDataset, buildSql, dataPath } = requireExternal("../scripts/prepare-real-conferences.cjs");
 const raw = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-test("eight real upcoming editions have field evidence and no invented tiers/fit", () => {
+test("eight real editions have reviewed fit and only one complete overall ICP", () => {
   const data = validateDataset(raw);
   assert.equal(data.records.length, 8);
-  for (const r of data.records) {
-    assert.equal(r.conference.targetAudienceFit, null);
-    assert.equal(r.icpStatus, "incomplete");
+  for (const [index, r] of data.records.entries()) {
+    assert.equal(r.conference.targetAudienceFit, index < 5 ? 100 : null);
+    assert.equal(r.icpStatus, index === 2 ? "complete" : "incomplete");
     assert.equal("tier" in r.conference, false);
     assert.equal(r.conference.isDemo, false);
     assert.ok(r.conference.lastVerifiedAt);

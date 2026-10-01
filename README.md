@@ -72,5 +72,5 @@ API reference: [HubSpot contact API](https://developers.hubspot.com/docs/api-ref
 
 ## Offline real-conference dataset
 
-Eight official-source editions were researched on October 1, 2026. They are an offline import artifact, not runtime data. See [the research report and manual import instructions](docs/verified-real-conferences.md). Validate with `node scripts/prepare-real-conferences.cjs`; no database writes occur. The current synthetic fixtures, scoring and UI remain unchanged.
+Eight official-source editions were researched on October 1, 2026 and the developer reports the initial import is in production. The local approved review completes five audience assessments; only FinTech Connect has every input for ICP 100/Tier A. Those review changes await manual database application using `supabase/reviewed-target-audience-update.sql`. See [the research report and instructions](docs/verified-real-conferences.md). Validate offline with `node scripts/prepare-real-conferences.cjs`; no database writes occur. Synthetic fixtures and scoring methodology remain unchanged.
 
