@@ -5,7 +5,7 @@ import { qualificationPrompt } from "./qualification-prompt";
 import { demoQualification } from "./qualification-demo";
 
 export class QualificationError extends Error {
-  constructor(message: string, public status = 502) { super(message); }
+  constructor(message: string, public status = 502, public code?: "ai_not_configured") { super(message); }
 }
 const providerSchema = z.object({ status: z.literal("completed"), output: z.array(z.object({
   type: z.string(), content: z.array(z.object({ type: z.string(), text: z.string().optional() })).optional(),
@@ -15,8 +15,12 @@ export async function analyzeRelationship(raw: unknown, options: { apiKey?: stri
   const parsed = qualificationInputSchema.safeParse(raw);
   if (!parsed.success) throw new QualificationError("Invalid contact or history. Maximum 100 meetings and 50,000 note characters.", 400);
   const input = { ...parsed.data, interactions: [...parsed.data.interactions].sort((a,b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt)) };
-  if (!options.apiKey) return { mode: "demo" as const, analysis: demoQualification(input) };
-  if (!options.model) throw new QualificationError("Configure OPENAI_MODEL for live analysis.", 503);
+  if (!options.apiKey?.trim()) {
+    const analysis = demoQualification(input);
+    if (analysis) return { mode: "demo" as const, analysis };
+    throw new QualificationError("Live AI is not configured. Demo replay supports only unchanged seeded relationships. This custom history has not been analyzed; review the notes manually or ask your administrator to enable live AI.", 503, "ai_not_configured");
+  }
+  if (!options.model?.trim()) throw new QualificationError("Live AI is not configured: OPENAI_MODEL is missing. This history has not been analyzed.", 503, "ai_not_configured");
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), options.timeoutMs ?? 25000);
   try {

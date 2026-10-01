@@ -2,15 +2,16 @@ import { geographicRegions } from "./geography";
 import { scoreConference } from "./conference-scoring";
 import type { Conference, Vertical } from "@/types";
 
+export type PlanningConference = Omit<Conference, "region" | "estimatedAudienceSize" | "targetAudienceFit"> & { region: Conference["region"] | null; estimatedAudienceSize: number | null; targetAudienceFit: number | null };
 export const quarters = [1, 2, 3, 4] as const;
 export type Quarter = (typeof quarters)[number];
 export type PlanningConfiguration = {
   year: number;
   strategicVerticals: readonly Vertical[];
 };
-export type TripOpportunity = {
+export type TripOpportunity<T extends PlanningConference = Conference> = {
   id: string;
-  conferences: readonly [Conference, Conference];
+  conferences: readonly [T, T];
   daysApart: number;
   locationReason: string;
   reason: string;
@@ -22,11 +23,11 @@ export type CoverageGap = {
   reason: string;
 };
 
-export function conferenceQuarter(conference: Conference): Quarter {
+export function conferenceQuarter(conference: PlanningConference): Quarter {
   return (Math.floor((Number(conference.startDate.slice(5, 7)) - 1) / 3) + 1) as Quarter;
 }
 
-export function setConferencePlanned(conferences: readonly Conference[], id: string, planned: boolean): Conference[] {
+export function setConferencePlanned<T extends PlanningConference>(conferences: readonly T[], id: string, planned: boolean): T[] {
   return conferences.map(conference => conference.id === id
     ? { ...conference, attendanceStatus: planned ? "planned" : "unplanned" } : conference);
 }
@@ -35,15 +36,15 @@ export function setConferencePlanned(conferences: readonly Conference[], id: str
  * UTC arithmetic makes results independent of timezone and DST.
  * ICP tiers come from the shared deterministic scoring function.
  */
-export function buildYearlyPlan(conferences: readonly Conference[], config: PlanningConfiguration) {
+export function buildYearlyPlan<T extends PlanningConference>(conferences: readonly T[], config: PlanningConfiguration, tierFor: (conference: T) => string | null = conference => conference.region === null || conference.estimatedAudienceSize === null || conference.targetAudienceFit === null ? null : scoreConference(conference as Conference).tier) {
   const planned = conferences.filter(conference => conference.attendanceStatus === "planned"
     && Number(conference.startDate.slice(0, 4)) === config.year)
     .sort((a, b) => a.startDate.localeCompare(b.startDate) || a.id.localeCompare(b.id));
   const byQuarter = Object.fromEntries(quarters.map(quarter => [quarter,
     planned.filter(conference => conferenceQuarter(conference) === quarter),
-  ])) as Record<Quarter, Conference[]>;
-  const trips: TripOpportunity[] = [];
-  const highPriority = planned.filter(conference => scoreConference(conference).tier === "A");
+  ])) as Record<Quarter, T[]>;
+  const trips: TripOpportunity<T>[] = [];
+  const highPriority = planned.filter(conference => tierFor(conference) === "A");
   for (let i = 0; i < highPriority.length; i++) {
     for (let j = i + 1; j < highPriority.length; j++) {
       const first = highPriority[i];
@@ -53,10 +54,10 @@ export function buildYearlyPlan(conferences: readonly Conference[], config: Plan
       if (daysApart > 7) break;
       const sameCity = first.city.trim().toLowerCase() === second.city.trim().toLowerCase()
         && first.country.trim().toLowerCase() === second.country.trim().toLowerCase();
-      const sameRegion = first.region === second.region;
+      const sameRegion = first.region !== null && first.region === second.region;
       if (!sameCity && !sameRegion) continue;
       const locationReason = sameCity ? `Same city: ${first.city}`
-        : `Same region: ${geographicRegions[first.region].label}`;
+        : `Same region: ${geographicRegions[first.region!].label}`;
       trips.push({ id: `trip:${first.id}:${second.id}`, conferences: [first, second], daysApart, locationReason,
         reason: `Both conferences are planned and Tier A. Their start dates are ${daysApart} ${daysApart === 1 ? "day" : "days"} apart (within 7 days). ${locationReason}.`,
       });

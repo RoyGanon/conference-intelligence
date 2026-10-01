@@ -19,6 +19,6 @@ export async function POST(request: Request) {
     try { input = JSON.parse(body); } catch { return Response.json({ error: "Invalid JSON request." }, { status: 400, headers }); }
     return Response.json(await analyzeRelationship(input, { apiKey: process.env.OPENAI_API_KEY?.trim(), model: process.env.OPENAI_MODEL?.trim() }), { headers });
   } catch (error) {
-    return Response.json({ error: error instanceof QualificationError ? error.message : "Analysis failed. Please retry." }, { status: error instanceof QualificationError ? error.status : 500, headers });
+    return Response.json({ error: error instanceof QualificationError ? error.message : "Analysis failed. Please retry.", ...(error instanceof QualificationError && error.code ? { code: error.code } : {}) }, { status: error instanceof QualificationError ? error.status : 500, headers });
   }
 }

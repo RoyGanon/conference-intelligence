@@ -12,11 +12,5 @@ const fixtureOutputs = [
 export function demoQualification(input: QualificationInput) {
   const ordered = [...input.interactions].sort((a,b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt));
   const index = demoContacts.findIndex(c => c.name === input.contact.name && c.company === input.contact.company && c.role === input.contact.role && JSON.stringify(ordered) === JSON.stringify(demoInteractions.filter(i => i.contactId === c.id).map(i => ({ occurredAt: i.occurredAt, conference: demoConferences.find(event => event.id === i.conferenceId)!.name, notes: i.notes }))));
-  return index >= 0 ? fixtureOutputs[index] : qualificationSchema.parse({
-    priority: "low", score: 0, relationshipStatus: "insufficient_evidence",
-    reasons: ["Demo mode has no authored qualification fixture for this exact contact and history; it does not interpret custom notes."],
-    progressionSummary: "Relationship progression is not evaluated for custom histories in demo mode.",
-    suggestedNextAction: "Review the recorded notes manually, or configure live AI analysis to interpret this history.",
-    missingEvidence: ["A live interpretation of this contact's current history"],
-  });
+  return index >= 0 ? fixtureOutputs[index] : undefined;
 }

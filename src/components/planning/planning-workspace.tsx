@@ -1,42 +1,52 @@
 "use client";
 
-import { useState } from "react";
-import { demoConferences } from "@/lib/demo-fixtures";
-import { buildYearlyPlan, quarters, setConferencePlanned } from "@/lib/planning";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import type { DiscoveryConference } from "@/lib/conference-discovery-data";
+import { readPlannedIds, writePlannedIds } from "@/lib/planning-storage";
+import { buildYearlyPlan, quarters } from "@/lib/planning";
 import { defaultStrategicVerticals } from "@/lib/planning-demo";
-import { scoreConference } from "@/lib/conference-scoring";
 import { TierBadge } from "@/components/ui";
 import { verticalSchema } from "@/lib/schemas";
-import type { Conference, Vertical } from "@/types";
+import type { Vertical } from "@/types";
 
 const controlClass = "rounded-lg border border-[#b9c9ae] px-3 py-2 text-sm font-medium hover:bg-[#edf3e7] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#526c38]";
 const panelClass = "rounded-2xl border border-[#dfe5dc] bg-white p-5";
 
-function ConferenceRow({ conference, onToggle }: { conference: Conference; onToggle: (conference: Conference) => void }) {
-  const planned = conference.attendanceStatus === "planned";
+function ConferenceRow({ item, planned, disabled, onToggle }: { item: DiscoveryConference; planned: boolean; disabled: boolean; onToggle: (id: string) => void }) {
+  const conference = item.conference;
   return <li className="flex flex-wrap items-center justify-between gap-4 border-t border-[#edf0e9] py-4 first:border-t-0">
     <div>
       <h3 className="font-semibold">{conference.name}</h3>
       <p className="mt-1 text-sm text-[#65756b]">{conference.startDate} – {conference.endDate} · {conference.city}, {conference.country}</p>
-      <div className="mt-2 flex items-center gap-2 text-xs text-[#65756b]">{conference.vertical} · ICP {scoreConference(conference).score}/100 <TierBadge tier={scoreConference(conference).tier} /></div>
+      <div className="mt-2 flex items-center gap-2 text-xs text-[#65756b]">{conference.vertical} · {item.scoring ? <>ICP {item.scoring.score}/100 <TierBadge tier={item.scoring.tier} /></> : "ICP incomplete"}</div>
+      <p className="mt-1 text-xs text-[#65756b]">{conference.lifecycleStatus}{conference.needsReview && " · Needs review"} · {conference.region ?? "Geography unknown"}</p>
+      <Link className="mt-2 inline-block text-sm underline" href={`/leads?conferenceId=${conference.id}`}>Capture Lead</Link>
     </div>
-    <button type="button" className={controlClass} onClick={() => onToggle(conference)}
+    <button type="button" disabled={disabled} className={`${controlClass} disabled:opacity-50`} onClick={() => onToggle(conference.id)}
       aria-label={`${planned ? "Remove" : "Add"} ${conference.name} ${planned ? "from" : "to"} yearly plan`}>
       {planned ? "Remove from plan" : "Add to plan"}
     </button>
   </li>;
 }
 
-export function PlanningWorkspace() {
-  const [conferences, setConferences] = useState<Conference[]>(demoConferences);
-  const [year, setYear] = useState(2026);
+export function PlanningWorkspace({ conferences: items, conferenceId }: { conferences: DiscoveryConference[]; conferenceId?: string }) {
+  const [plannedIds, setPlannedIds] = useState<string[]>([]);
+  const [ready, setReady] = useState(false);
+  const [storageError, setStorageError] = useState("");
+  const selected = items.find(item => item.conference.id === conferenceId)?.conference;
+  const [year, setYear] = useState(Number((selected ?? items[0]?.conference)?.startDate.slice(0, 4)) || 2026);
+  useEffect(() => { let active = true; Promise.resolve().then(() => { if (!active) return; try { setPlannedIds(readPlannedIds()); } catch { setStorageError("Could not load your browser plan. Saved selections were not overwritten."); } setReady(true); }); return () => { active = false; }; }, []);
+  const conferences = items.map(item => ({ ...item.conference, attendanceStatus: plannedIds.includes(item.conference.id) ? "planned" as const : "unplanned" as const }));
   const [strategicVerticals, setStrategicVerticals] = useState<Vertical[]>([...defaultStrategicVerticals]);
-  const years = [...new Set(demoConferences.map(conference => Number(conference.startDate.slice(0, 4))))].sort();
-  const plan = buildYearlyPlan(conferences, { year, strategicVerticals });
+  const years = [...new Set(conferences.map(conference => Number(conference.startDate.slice(0, 4))))].sort();
+  const plan = buildYearlyPlan(conferences, { year, strategicVerticals }, conference => items.find(item => item.conference.id === conference.id)?.scoring?.tier ?? null);
   const available = conferences.filter(conference => Number(conference.startDate.slice(0, 4)) === year
     && conference.attendanceStatus === "unplanned").sort((a, b) => a.startDate.localeCompare(b.startDate));
-  function toggleConference(conference: Conference) {
-    setConferences(current => setConferencePlanned(current, conference.id, conference.attendanceStatus !== "planned"));
+  function toggleConference(id: string) {
+    if (!ready || storageError) return;
+    const next = plannedIds.includes(id) ? plannedIds.filter(value => value !== id) : [...plannedIds, id];
+    try { writePlannedIds(next); setPlannedIds(next); } catch { setStorageError("Could not save your plan. Check browser storage access."); }
   }
   return <section>
     <p className="text-xs font-semibold uppercase tracking-widest text-[#6a824f]">Conference Planning</p>
@@ -48,8 +58,10 @@ export function PlanningWorkspace() {
         </select>
       </label>
     </div>
-    <p className="mt-3 max-w-3xl text-sm leading-6 text-[#65756b]">Add conferences to shape quarterly coverage and find opportunities to combine trips. Changes reset when you leave this page or reload.</p>
-    <p className="mt-2 text-xs leading-5 text-[#65756b]">Synthetic demo data: tiers use the same deterministic ICP scoring as Conferences. Quarters and trip spacing use conference start dates. Regions use predefined nearby groupings.</p>
+    <p className="mt-3 max-w-3xl text-sm leading-6 text-[#65756b]">Add conferences to shape quarterly coverage and find opportunities to combine trips. Selections are saved in this browser across navigation and refresh.</p>
+    <p className="mt-2 text-xs leading-5 text-[#65756b]">Real conference data: accepted scores use the same deterministic ICP scoring as Conferences. Incomplete ICP conferences cannot qualify for Tier A trip opportunities. Quarters and trip spacing use conference start dates. Regions use predefined nearby groupings.</p>
+    {storageError && <p role="alert" className="mt-3 text-sm text-red-800">{storageError}</p>}
+    {!ready && <p role="status" className="mt-3 text-sm">Loading saved plan…</p>}
     <fieldset className={`${panelClass} mt-6`}>
       <legend className="px-2 font-semibold">Strategic verticals</legend>
       <p className="text-sm text-[#65756b]">Check coverage for these verticals in every quarter.</p>
@@ -69,14 +81,14 @@ export function PlanningWorkspace() {
       {quarters.map(quarter => <section key={quarter} className={panelClass} aria-labelledby={`quarter-${quarter}`}>
         <h2 id={`quarter-${quarter}`} className="font-semibold">Q{quarter} {year} <span className="font-normal text-[#65756b]">· {plan.byQuarter[quarter].length} planned</span></h2>
         {plan.byQuarter[quarter].length ? <ul className="mt-3">{plan.byQuarter[quarter].map(conference =>
-          <ConferenceRow key={conference.id} conference={conference} onToggle={toggleConference} />)}</ul>
+          <ConferenceRow key={conference.id} item={items.find(item => item.conference.id === conference.id)!} planned={plannedIds.includes(conference.id)} disabled={!ready || Boolean(storageError)} onToggle={toggleConference} />)}</ul>
           : <p className="mt-4 text-sm text-[#65756b]">No conferences planned for this quarter.</p>}
       </section>)}
     </div>
     <section className={`${panelClass} mt-6`} aria-labelledby="available-heading">
       <h2 id="available-heading" className="text-xl font-semibold">Available conferences · {year}</h2>
       {available.length ? <ul className="mt-3">{available.map(conference =>
-        <ConferenceRow key={conference.id} conference={conference} onToggle={toggleConference} />)}</ul>
+        <ConferenceRow key={conference.id} item={items.find(item => item.conference.id === conference.id)!} planned={plannedIds.includes(conference.id)} disabled={!ready || Boolean(storageError)} onToggle={toggleConference} />)}</ul>
         : <p className="mt-4 text-sm text-[#65756b]">All conferences for this year are in your plan.</p>}
     </section>
     <section className="mt-8" aria-labelledby="insights-heading">
